@@ -6,11 +6,11 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long id;
 
-    String Name;
-    long groupId;
-    String date;
+    private String name;
+    private long groupId;
+    private String date;
 
     public long getId() {
         return id;
@@ -21,7 +21,7 @@ public class Student {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public long getGroupId() {
@@ -33,7 +33,7 @@ public class Student {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDate() {

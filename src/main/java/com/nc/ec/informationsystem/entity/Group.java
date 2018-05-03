@@ -1,22 +1,20 @@
 package com.nc.ec.informationsystem.entity;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    long id;
+    private int number;
 
-
-    int number;
-
-
-    String faculty;
+    private String faculty;
 
     public long getId() {
         return id;

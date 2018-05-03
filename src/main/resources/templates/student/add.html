@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<form th:action="@{/student/add}" th:object="${student}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+
+    <div >
+        <label for="text">Name</label>
+        <textarea  id="text" th:field="*{name}" ></textarea>
+        <ul>
+            <li th:each="err : ${#fields.errors('text')}" th:text="${err}"></li>
+        </ul>
+    </div>
+    <div >
+        <label for="theme">Group</label>
+        <select id="theme" class="form-control" th:field="*{groupId}">
+            <option th:each="theme : ${groups}"
+                    th:value="${group.id}"
+                    th:text="${group.number}"></option>
+        </select>
+    </div>
+    <div >
+        <label for="text">date</label>
+        <textarea id="text" th:field="*{date}" ></textarea>
+        <ul>
+            <li th:each="err : ${#fields.errors('text')}" th:text="${err}"></li>
+        </ul>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

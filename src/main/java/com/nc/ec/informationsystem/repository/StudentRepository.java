@@ -4,9 +4,11 @@ package com.nc.ec.informationsystem.repository;
 import com.nc.ec.informationsystem.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 //    @Query("select all from student")
 //    List<Student> findAll();

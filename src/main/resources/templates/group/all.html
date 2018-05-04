@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div>
+        <h3>Groups</h3>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Faculty</th>
+            <th>Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="group : ${groups}">
+            <td><a th:href="@{/group/{id}/(id=${group.id})}" th:text="${group.number}"/></td>
+            <td th:text="${group.faculty}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

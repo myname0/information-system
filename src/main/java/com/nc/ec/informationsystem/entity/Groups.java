@@ -1,20 +1,18 @@
 package com.nc.ec.informationsystem.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-
-public class Group {
+@Table(name="groups")
+public class Groups {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private int number;
-
     private String faculty;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Student> students;
 
     public long getId() {
         return id;
@@ -38,5 +36,13 @@ public class Group {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

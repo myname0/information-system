@@ -1,15 +1,13 @@
 package com.nc.ec.informationsystem.repository;
 
-import com.nc.ec.informationsystem.entity.Group;
-import com.nc.ec.informationsystem.entity.Student;
+import com.nc.ec.informationsystem.entity.Groups;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface GroupRepository extends JpaRepository<Group, Long> {
+@Repository
+public interface GroupRepository extends JpaRepository<Groups, Long> {
 //    @Query("select all from group")
-//    List<Group> findAll();
+//    List<Groups> findAll();
 //
 ////    @Query("update ")
 ////    void update(Student student);

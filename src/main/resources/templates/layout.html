@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="page"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information System</title>
+</head>
+<body>
+<header>
+    <div><h1>Information System</h1></div>
+    <navbar>
+        <ul>
+            <li><a href="/group/all">Groups</a></li>
+            <li><a href="/student/all">Students</a></li>
+        </ul>
+    </navbar>
+</header>
+<content>
+    <div th:include="this :: content"></div>
+</content>
+
+</body>
+</html>

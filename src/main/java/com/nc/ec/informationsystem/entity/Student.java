@@ -3,13 +3,14 @@ package com.nc.ec.informationsystem.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
-    private long groupId;
+    @ManyToOne
+    private Groups group;
     private String date;
 
     public long getId() {
@@ -24,12 +25,12 @@ public class Student {
         return name;
     }
 
-    public long getGroupId() {
-        return groupId;
+    public Groups getGroup() {
+        return group;
     }
 
-    public void setGroupId(long groupId) {
-        this.groupId = groupId;
+    public void setGroup(Groups groupId) {
+        this.group = groupId;
     }
 
     public void setName(String name) {

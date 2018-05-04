@@ -12,10 +12,10 @@
     <div>
         <h3>Add New Group</h3>
     </div>
-    <form th:action="@{/group/add}" th:object="${groups}" method="POST">
+    <form th:action="@{/group/add}" th:object="${group}" method="POST">
         <input type="hidden" th:field="*{id}" />
 
-        <div >
+        <div>
             <label for="faculty">Faculty Name</label>
             <input type="text"  id="faculty" th:field="*{faculty}" />
         </div>

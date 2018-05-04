@@ -6,10 +6,12 @@ import com.nc.ec.informationsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,31 +24,46 @@ public class GroupController {
     StudentRepository studentRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addGroup(Groups group) {
+    public String addGroup(@Valid Groups group) {
         groupRepository.save(group);
-        return "redirect:/all";
+        return "redirect:/group/" + group.getId();
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String deleteGroupById(long id) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addGroup(ModelMap model){
+        model.addAttribute("group", new Groups());
+        return "group/add";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteGroupById(@PathVariable long id) {
         groupRepository.deleteById(id);
         return "redirect:/all";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updateGroup(Groups group) {
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    public String updateGroup(@Valid Groups group) {
         groupRepository.save(group);
-        return "redirect:/all";
+        return "redirect:/group/" + group.getId();
+    }
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public String updateGroup(@PathVariable long id, ModelMap model){
+        Groups group = groupRepository.findById(id).get();
+        model.addAttribute("group", group);
+        return "group/add";
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Groups> getAllGroups() {
-        List<Groups> groups = groupRepository.findAll();
-        return groups;
+    public String getAllGroups(ModelMap model) {
+        model.addAttribute("groups", groupRepository.findAll());
+        return "group/all";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getGroupById(@PathVariable long id, ModelMap model){
-        return "";
+        Groups groups = groupRepository.findById(id).get();
+        model.addAttribute("group", groups);
+        return "group/view";
     }
 }

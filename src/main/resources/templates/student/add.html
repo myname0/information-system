@@ -8,29 +8,25 @@
     <title>Student</title>
 </head>
 <body>
-<form th:action="@{/student/add}" th:object="${student}" method="POST">
-    <input type="hidden" th:field="*{id}" />
-
+<div th:fragment="content">
     <div>
-        <label for="name">Name</label>
-        <textarea  id="name" th:field="*{name}" ></textarea>
-        <!--<ul>-->
-            <!--<li th:each="err : ${#fields.errors('text')}" th:text="${err}"></li>-->
-        <!--</ul>-->
+        <h2 class="header-2">Add New Student</h2>
     </div>
-    <div >
-        <label for="group">Group</label>
-        <select id="group" th:field="*{group}">
+    <form th:action="@{/student/add}" th:object="${student}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+
+        <input class="input-text" type="text" placeholder="Enter Name" th:field="*{name}">
+
+        <select class="input-text" th:field="*{group}">
             <option th:each="group : ${groups}"
                     th:value="${group}"
-                    th:text="${group.faculty} ${group.number}"></option>
+                    th:text="${group.faculty} + ' ' + ${group.number}"></option>
         </select>
-    </div>
-    <div >
-        <label for="date">date</label>
-        <textarea id="date" th:field="*{date}" ></textarea>
-    </div>
-    <button type="submit">Save</button>
-</form>
+
+        <input class="input-text" type="text" placeholder="Enter Date Of Enrollment" th:field="*{date}">
+
+        <button class="button" type="submit">Save</button>
+    </form>
+</div>
 </body>
 </html>

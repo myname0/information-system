@@ -6,13 +6,11 @@ import com.nc.ec.informationsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/group")
@@ -30,15 +28,15 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addGroup(ModelMap model){
+    public String addGroup(ModelMap model) {
         model.addAttribute("group", new Groups());
         return "group/add";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String deleteGroupById(@PathVariable long id) {
         groupRepository.deleteById(id);
-        return "redirect:/all";
+        return "redirect:/group/all";
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
@@ -48,7 +46,7 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public String updateGroup(@PathVariable long id, ModelMap model){
+    public String updateGroup(@PathVariable long id, ModelMap model) {
         Groups group = groupRepository.findById(id).get();
         model.addAttribute("group", group);
         return "group/add";
@@ -61,7 +59,7 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getGroupById(@PathVariable long id, ModelMap model){
+    public String getGroupById(@PathVariable long id, ModelMap model) {
         Groups groups = groupRepository.findById(id).get();
         model.addAttribute("group", groups);
         return "group/view";

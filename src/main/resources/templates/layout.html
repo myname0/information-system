@@ -6,20 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Information System</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<header>
-    <div><h1>Information System</h1></div>
+<header class="header">
+    <div><h1 class="header-text">Information System</h1></div>
     <navbar>
-        <ul>
-            <li><a href="/group/all">Groups</a></li>
-            <li><a href="/student/all">Students</a></li>
+        <ul class="list">
+            <li class="inline-list-element"><a href="/group/all">Groups</a></li>
+            <li class="inline-list-element"><a href="/student/all">Students</a></li>
         </ul>
     </navbar>
 </header>
-<content>
+<div class="container">
     <div th:include="this :: content"></div>
-</content>
+</div>
 
 </body>
 </html>

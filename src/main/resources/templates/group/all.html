@@ -10,11 +10,14 @@
 <body>
 <div th:fragment="content">
     <div>
-        <h3>Groups</h3>
+        <h2 class="header-2">Groups</h2>
     </div>
+    <form th:action="@{/group/add}">
+        <button class="button">Add New Group</button>
+    </form>
 
-    <table>
-        <thead>
+    <table class="table">
+        <thead class="table-header">
         <tr>
             <th>Number</th>
             <th>Faculty</th>

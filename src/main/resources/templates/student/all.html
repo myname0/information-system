@@ -23,9 +23,9 @@
         </thead>
         <tbody>
         <tr th:each="student : ${students}">
-            <td> th:text="${student.name}"</td>
+            <td th:text="${student.name}"></td>
             <td><a th:href="@{/group/{id}/(id=${student.group.id})}" th:text="${student.group.number}"/></td>
-            <td>th:text="${student.date}"/></td>
+            <td th:text="${student.date}"></td>
         </tr>
         </tbody>
     </table>

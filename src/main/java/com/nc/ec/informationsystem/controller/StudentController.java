@@ -1,9 +1,11 @@
 package com.nc.ec.informationsystem.controller;
 
+import com.nc.ec.informationsystem.controller.form.StudentForm;
 import com.nc.ec.informationsystem.entity.Student;
 import com.nc.ec.informationsystem.repository.GroupRepository;
 import com.nc.ec.informationsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +20,19 @@ public class StudentController {
     StudentRepository studentRepository;
     @Autowired
     GroupRepository groupRepository;
+    @Autowired
+    ConversionService conversionService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addStudent(ModelMap model) {
-        model.addAttribute("student", new Student());
+        model.addAttribute("student", new StudentForm());
         model.addAttribute("groups", groupRepository.findAll());
-        return "student/add";
+        return "/student/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addStudent(@Valid Student student) {
+    public String addStudent(@Valid StudentForm studentForm) {
+        Student student = conversionService.convert(studentForm, Student.class);
         studentRepository.save(student);
         return "redirect:/student/" + student.getId();
     }
@@ -49,19 +54,19 @@ public class StudentController {
         Student student = studentRepository.findById(id).get();
         model.addAttribute("student", student);
         model.addAttribute("groups", groupRepository.findAll());
-        return "student/add";
+        return "/student/add";
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(ModelMap model) {
         model.addAttribute("students", studentRepository.findAll());
-        return "student/all";
+        return "/student/all";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getStudentById(@PathVariable long id, ModelMap model) {
         Student student = studentRepository.findById(id).get();
         model.addAttribute("student", student);
-        return "student/view";
+        return "/student/view";
     }
 }

@@ -17,9 +17,9 @@
 
         <input class="input-text" type="text" placeholder="Enter Name" th:field="*{name}">
 
-        <select class="input-text" th:field="*{group}">
+        <select class="input-text" th:field="*{groupId}">
             <option th:each="group : ${groups}"
-                    th:value="${group}"
+                    th:value="${group.id}"
                     th:text="${group.faculty} + ' ' + ${group.number}"></option>
         </select>
 

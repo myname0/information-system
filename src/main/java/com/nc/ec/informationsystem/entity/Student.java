@@ -1,6 +1,8 @@
 package com.nc.ec.informationsystem.entity;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "student")
@@ -10,7 +12,8 @@ public class Student {
     private long id;
     @Column(name = "st_name")
     private String name;
-    @Column (name = "st_group_id")
+    @NotNull
+    @Column(name = "st_group_id")
     private long groupId;
     @Column(name = "st_date")
     private String date;

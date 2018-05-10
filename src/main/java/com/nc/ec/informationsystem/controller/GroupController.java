@@ -23,14 +23,15 @@ public class GroupController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addGroup(@Valid Groups group) {
-        groupRepository.save(group);
-        return "redirect:/group/" + group.getId();
+        groupRepository.save(group.getNumber(), group.getFaculty());
+        return "redirect:/group/all";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addGroup(ModelMap model) {
         model.addAttribute("group", new Groups());
-        return "group/add";
+        model.addAttribute("link", "/group/add");
+        return "/group/add";
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
@@ -41,14 +42,15 @@ public class GroupController {
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
     public String updateGroup(@Valid Groups group) {
-        groupRepository.save(group);
+        groupRepository.update(group.getId(), group.getNumber(), group.getFaculty());
         return "redirect:/group/" + group.getId();
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     public String updateGroup(@PathVariable long id, ModelMap model) {
-        Groups group = groupRepository.findById(id).get();
+        Groups group = groupRepository.findById(id);
         model.addAttribute("group", group);
+        model.addAttribute("link", "/group/" + id + "/edit");
         return "group/add";
     }
 
@@ -60,8 +62,9 @@ public class GroupController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getGroupById(@PathVariable long id, ModelMap model) {
-        Groups groups = groupRepository.findById(id).get();
-        model.addAttribute("group", groups);
+        Groups group = groupRepository.findById(id);
+        model.addAttribute("group", group);
+        model.addAttribute("students", studentRepository.findByGroupId(id));
         return "group/view";
     }
 }

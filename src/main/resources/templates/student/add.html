@@ -12,7 +12,7 @@
     <div>
         <h2 class="header-2">Add New Student</h2>
     </div>
-    <form th:action="@{/student/add}" th:object="${student}" method="POST">
+    <form th:action="${link}" th:object="${student}" method="POST">
         <input type="hidden" th:field="*{id}"/>
 
         <input class="input-text" type="text" placeholder="Enter Name" th:field="*{name}">

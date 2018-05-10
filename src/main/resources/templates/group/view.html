@@ -13,8 +13,8 @@
     </div>
 
     <div>
-        <ul th:each="student : ${group.students}">
-            <li><a th:href="@{/student/{id}(id=${student.id})}" th:text="student.name"></a></li>
+        <ul class="" th:each="student : ${students}">
+            <li><a th:href="@{/student/{id}(id=${student.id})}" th:text="${student.name}"></a></li>
         </ul>
     </div>
 

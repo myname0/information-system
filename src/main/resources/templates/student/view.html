@@ -12,8 +12,11 @@
 
     <h2 class="header-2">Name&#8758; <b class="header-2" th:text="${student.name}"></b></h2>
 
-    <h2 class="header-2">Faculty&#8758;<a class="header-2" th:href="@{group/{id}(id=${student.group.id})}"
-                                          th:text="${student.group.faculty}"></a>
+    <h2 class="header-2">Faculty&#8758; <b class="header-2" th:text="${group.faculty}"></b>
+    </h2>
+
+    <h2 class="header-2">Group Number&#8758;<a class="header-2" th:href="@{/group/{id}(id=${group.id})}"
+                                               th:text="${group.number}"></a>
     </h2>
 
     <h2 class="header-2">Date of Enrollment&#8758; <b class="header-2" th:text="${student.date}"></b></h2>

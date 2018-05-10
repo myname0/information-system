@@ -3,14 +3,16 @@ package com.nc.ec.informationsystem.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="student")
+@Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "st_name")
     private String name;
-    @ManyToOne
-    private Groups group;
+    @Column (name = "st_group_id")
+    private long groupId;
+    @Column(name = "st_date")
     private String date;
 
     public long getId() {
@@ -25,12 +27,12 @@ public class Student {
         return name;
     }
 
-    public Groups getGroup() {
-        return group;
+    public long getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(Groups groupId) {
-        this.group = groupId;
+    public void setGroupId(long groupId) {
+        this.groupId = groupId;
     }
 
     public void setName(String name) {

@@ -27,33 +27,37 @@ public class StudentController {
     public String addStudent(ModelMap model) {
         model.addAttribute("student", new StudentForm());
         model.addAttribute("groups", groupRepository.findAll());
+        model.addAttribute("link", "/student/add");
         return "/student/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addStudent(@Valid StudentForm studentForm) {
         Student student = conversionService.convert(studentForm, Student.class);
-        studentRepository.save(student);
-        return "redirect:/student/" + student.getId();
+        studentRepository.save(student.getName(), student.getGroupId(), student.getDate());
+        return "redirect:/student/all";
     }
 
-    @RequestMapping(value = "{id}/delete/", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
     public String deleteStudentById(@PathVariable long id) {
         studentRepository.deleteById(id);
-        return "redirect:/all";
+        return "redirect:/student/all";
     }
 
     @RequestMapping(value = "{id}/edit", method = RequestMethod.POST)
-    public String updateStudent(@PathVariable long id, @Valid Student student) {
-        studentRepository.save(student);
-        return "redirect:/student" + id;
+    public String updateStudent(@PathVariable long id, @Valid StudentForm studentForm) {
+        Student student = conversionService.convert(studentForm, Student.class);
+        studentRepository.update(id, student.getName(), student.getGroupId(), student.getDate());
+        return "redirect:/student/" + id;
     }
 
     @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
     public String updateStudent(@PathVariable long id, ModelMap model) {
-        Student student = studentRepository.findById(id).get();
-        model.addAttribute("student", student);
+        Student student = studentRepository.findById(id);
+        StudentForm studentForm = conversionService.convert(student, StudentForm.class);
+        model.addAttribute("student", studentForm);
         model.addAttribute("groups", groupRepository.findAll());
+        model.addAttribute("link", "/student/" + id + "/edit");
         return "/student/add";
     }
 
@@ -65,8 +69,9 @@ public class StudentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getStudentById(@PathVariable long id, ModelMap model) {
-        Student student = studentRepository.findById(id).get();
+        Student student = studentRepository.findById(id);
         model.addAttribute("student", student);
+        model.addAttribute("group", groupRepository.findById(student.getGroupId()));
         return "/student/view";
     }
 }

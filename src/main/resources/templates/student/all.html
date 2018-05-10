@@ -23,8 +23,8 @@
         </thead>
         <tbody>
         <tr th:each="student : ${students}">
-            <td th:text="${student.name}"></td>
-            <td><a th:href="@{/group/{id}/(id=${student.group.id})}" th:text="${student.group.number}"/></td>
+            <td><a th:href="@{/student/{id}/(id=${student.id})}" th:text="${student.name}"/></td>
+            <td><a th:href="@{/group/{id}/(id=${student.groupId})}" th:text="${student.groupId}"/></td>
             <td th:text="${student.date}"></td>
         </tr>
         </tbody>

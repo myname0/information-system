@@ -7,12 +7,12 @@ import java.util.Set;
 @Table(name="groups")
 public class Groups {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "gr_number")
     private int number;
+    @Column(name = "gr_faculty")
     private String faculty;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Student> students;
 
     public long getId() {
         return id;
@@ -36,13 +36,5 @@ public class Groups {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
-    }
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
     }
 }
